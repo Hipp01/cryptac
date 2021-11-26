@@ -1,0 +1,14 @@
+image: jangrewe/gitlab-ci-android
+
+variables:
+  CMC_API_KEY: s0m3-4p1-k3y
+
+stages:
+  - compile
+
+compile:
+  stage: compile
+  before_script:
+    - echo "CMC_API_KEY=$CMC_API_KEY" >> local.properties
+  script:
+    - ./gradlew assemble
