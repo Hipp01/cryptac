@@ -5,4 +5,5 @@ package fr.tac.cryptac.shared
  */
 object AppConfig {
     const val CURRENCY = "EUR"
+    const val DATABASE_NAME = "cryptac"
 }
