@@ -5,9 +5,10 @@ data class Listings(
 )
 
 data class ListingsData(
+    val id: Int,
+    val cmcRank: Int,
     val name: String,
     val symbol: String,
-    val cmcRank: String,
     val quote: Map<String, ListingsDataQuote>
 )
 

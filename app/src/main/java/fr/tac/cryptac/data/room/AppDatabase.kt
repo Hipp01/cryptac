@@ -44,5 +44,4 @@ abstract class AppDatabase : RoomDatabase() {
             return instance as AppDatabase
         }
     }
-
 }

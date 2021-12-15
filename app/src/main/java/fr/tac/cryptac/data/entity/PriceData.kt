@@ -8,10 +8,10 @@ data class PriceData(
     @PrimaryKey(autoGenerate = false)
     val cryptoId: Int,
     val cmcRank: Int,
-    val price: Int,
+    val price: Double,
     val percentChange24h: Float,
-    val marketCap: Long,
-    val volume24h: Long,
-    val circulatingSupply: Long,
+    val marketCap: Double,
+    val volume24h: Double,
+    val circulatingSupply: Double,
     val currency: String
 )

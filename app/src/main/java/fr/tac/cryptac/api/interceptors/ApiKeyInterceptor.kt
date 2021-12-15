@@ -26,5 +26,4 @@ class ApiKeyInterceptor : Interceptor {
             .build()
         return chain.proceed(request)
     }
-
 }

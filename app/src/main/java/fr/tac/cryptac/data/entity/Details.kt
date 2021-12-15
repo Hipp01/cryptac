@@ -11,9 +11,9 @@ data class Details(
     val symbol: String,
     val description: String,
     val logo: String,
-    val website: String,
-    val sourceCode: String,
-    val technicalDoc: String,
-    val reddit: String,
-    val twitter: String
+    val website: String?,
+    val sourceCode: String?,
+    val technicalDoc: String?,
+    val reddit: String?,
+    val twitter: String?
 )
