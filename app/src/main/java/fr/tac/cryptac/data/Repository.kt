@@ -4,11 +4,13 @@ import android.app.Application
 import android.util.Log
 import fr.tac.cryptac.api.ApiClient
 import fr.tac.cryptac.data.entity.Details
+import fr.tac.cryptac.data.entity.Favorite
 import fr.tac.cryptac.data.room.AppDatabase
 import fr.tac.cryptac.model.CryptoBasic
 import fr.tac.cryptac.model.CryptoDetails
 import fr.tac.cryptac.shared.CURRENCY
 import fr.tac.cryptac.util.CryptoUtils
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 private val TAG = Repository::class.simpleName
@@ -29,11 +31,12 @@ class Repository(application: Application) {
     private val database by lazy { AppDatabase.getInstance(application) }
 
     /**
-     * Fetch the list of the top cryptos from the API
-     * @return
+     * Fetch the list of the top cryptos from the API and retrieve the list of favorites from
+     * the database in order to determine the favorites cryptos
+     * @return a Single containing the list of cryptos
      */
     fun getCryptoList(): Single<List<CryptoBasic>> = retrofit.getListings()
-        .map { listings ->
+        .zipWith(database.favoriteDao().getAll()) { listings, favorites ->
             listings.data.map { crypto ->
                 val marketData = crypto.quote[CURRENCY] ?: error("empty market data")
 
@@ -45,7 +48,7 @@ class Repository(application: Application) {
                     CryptoUtils.getLogo(crypto.id),
                     marketData.price,
                     marketData.percentChange1h,
-                    false
+                    favorites.contains(Favorite(crypto.symbol))
                 )
             }
         }
@@ -108,6 +111,18 @@ class Repository(application: Application) {
                 details.reddit,
             )
         }
+
+    /**
+     * Set the favorite state of a given crypto to the provided value
+     * @param symbol the crypto symbol (BTC, ETH...)
+     * @param value true to save the crypto as a favorite, false to remove it
+     * @return a completable
+     */
+    fun setFavorite(symbol: String, value: Boolean): Completable = if (value) {
+        database.favoriteDao().add(Favorite(symbol))
+    } else {
+        database.favoriteDao().remove(Favorite(symbol))
+    }
 
     companion object {
         /**

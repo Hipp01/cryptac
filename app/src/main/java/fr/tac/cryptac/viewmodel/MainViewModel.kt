@@ -18,4 +18,9 @@ class MainViewModel(private val application: Application) : ViewModel() {
      * The list of the top cryptos
      */
     val cryptoList = repository.getCryptoList()
+
+    /**
+     * Set the favorite
+     */
+    fun setFavorite(symbol: String, value: Boolean) = repository.setFavorite(symbol, value)
 }

@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 @Entity
 data class Favorite(
     @PrimaryKey(autoGenerate = false)
-    val cryptoId: Int
+    val symbol: String
 )

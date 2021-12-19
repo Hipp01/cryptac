@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         disposable = viewModel.cryptoList
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { cryptoList -> recyclerView.adapter = CryptoAdapter(cryptoList) }
+            .subscribe { cryptoList -> recyclerView.adapter = CryptoAdapter(cryptoList, viewModel) }
     }
 
     /**
