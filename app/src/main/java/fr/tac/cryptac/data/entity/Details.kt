@@ -14,6 +14,6 @@ data class Details(
     val website: String?,
     val sourceCode: String?,
     val technicalDoc: String?,
-    val reddit: String?,
-    val twitter: String?
+    val twitter: String?,
+    val reddit: String?
 )

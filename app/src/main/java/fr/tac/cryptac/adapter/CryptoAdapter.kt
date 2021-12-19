@@ -1,5 +1,6 @@
 package fr.tac.cryptac.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -7,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.tac.cryptac.R
 import fr.tac.cryptac.databinding.FragmentCardItemBinding
 import fr.tac.cryptac.model.CryptoBasic
+import fr.tac.cryptac.view.DetailsActivity
+import fr.tac.cryptac.view.SYMBOL
 
 class CryptoAdapter(private var cryptoList: List<CryptoBasic>) :
     RecyclerView.Adapter<CryptoAdapter.ViewHolder>() {
@@ -26,6 +29,13 @@ class CryptoAdapter(private var cryptoList: List<CryptoBasic>) :
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.model = cryptoList[position]
+        holder.binding.root.setOnClickListener {
+            val model = holder.binding.model
+            val context = holder.binding.root.context
+            val intent = Intent(context, DetailsActivity::class.java)
+            intent.putExtra(SYMBOL, model?.symbol)
+            context.startActivity(intent)
+        }
         holder.binding.executePendingBindings()
     }
 

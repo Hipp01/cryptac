@@ -1,6 +1,6 @@
 package fr.tac.cryptac.util
 
-const val LOGO_BASE_URL = "https://s2.coinmarketcap.com/static/img/coins/64x64/%d.png"
+const val LOGO_BASE_URL = "https://s2.coinmarketcap.com/static/img/coins/128x128/%d.png"
 
 object CryptoUtils {
     /**

@@ -4,5 +4,18 @@
     <string name="favorite">Ajouter aux favoris</string>
     <string name="logo">Logo</string>
     <string name="percent_change">%1$.2f%%</string>
-    <string name="rank">%1$d</string>
+    <string name="integer">%1$d</string>
+    <string name="description">Description</string>
+    <string name="market">Marché</string>
+    <string name="volume_24h">Volume (24h)</string>
+    <string name="market_cap">Capitalisation</string>
+    <string name="circulating_supply">Qté en circulation</string>
+    <string name="links">Liens</string>
+    <string name="website">Site web</string>
+    <string name="source_code">Code source</string>
+    <string name="arrow">Arrow</string>
+    <string name="whitepaper">Whitepaper</string>
+    <string name="twitter">Twitter</string>
+    <string name="reddit">Reddit</string>
+    <string name="rank">Classement</string>
 </resources>

@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
-                android:text="@{@string/rank(model.cmcRank)}" />
+                android:text="@{@string/integer(model.cmcRank)}" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="35dp"
@@ -48,6 +48,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/logo"
                     app:imageUrl="@{model.logo}" />
+
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -64,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="@{model.name}" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -79,7 +81,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:orientation="vertical">
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -108,4 +109,5 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

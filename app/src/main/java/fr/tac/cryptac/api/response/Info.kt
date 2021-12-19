@@ -5,6 +5,7 @@ data class Info(
 )
 
 data class InfoData(
+    val id: Int,
     val name: String,
     val symbol: String,
     val logo: String,
@@ -16,5 +17,6 @@ data class InfoDataUrls(
     val website: List<String>,
     val twitter: List<String>,
     val technicalDoc: List<String>,
-    val sourceCode: List<String>
+    val sourceCode: List<String>,
+    val reddit: List<String>,
 )
