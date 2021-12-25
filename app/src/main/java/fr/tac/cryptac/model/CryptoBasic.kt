@@ -7,6 +7,6 @@ data class CryptoBasic(
     val symbol: String,
     val logo: String,
     val price: Double,
-    val percentChange24h: Float,
+    val percentChange1h: Float,
     var isFavorite: Boolean
 )

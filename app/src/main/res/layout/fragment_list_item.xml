@@ -98,8 +98,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:textSize="@dimen/font_size_m"
-                    android:text="@{@string/percent_change(model.percentChange24h)}"
-                    android:textColor="@{model.percentChange24h >= 0 ? @color/green : @color/red}" />
+                    android:text="@{@string/percent_change(model.percentChange1h)}"
+                    android:textColor="@{model.percentChange1h >= 0 ? @color/green : @color/red}" />
 
             </LinearLayout>
 

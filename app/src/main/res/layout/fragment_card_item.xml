@@ -101,8 +101,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@{@string/percent_change(model.percentChange24h)}"
-                android:textColor="@{model.percentChange24h >= 0 ? @color/green : @color/red}"
+                android:text="@{@string/percent_change(model.percentChange1h)}"
+                android:textColor="@{model.percentChange1h >= 0 ? @color/green : @color/red}"
                 android:textSize="@dimen/font_size_m" />
 
             <TextView

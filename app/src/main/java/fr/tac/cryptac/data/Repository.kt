@@ -99,7 +99,7 @@ class Repository(application: Application) {
                 details.name,
                 details.description,
                 priceData.price,
-                priceData.percentChange24h,
+                priceData.percentChange1h,
                 priceData.volume24h,
                 priceData.marketCap,
                 quote.cmcRank,

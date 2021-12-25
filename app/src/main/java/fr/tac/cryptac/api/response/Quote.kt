@@ -12,7 +12,7 @@ data class QuoteData(
 
 data class QuoteDataQuote(
     val price: Double,
-    val percentChange24h: Float,
+    val percentChange1h: Float,
     val volume24h: Double,
     val marketCap: Double,
 )
