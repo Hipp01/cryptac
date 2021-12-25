@@ -11,10 +11,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/item_spacing"
         android:background="@drawable/ripple_background"
         android:clickable="true"
-        android:padding="15dp">
+        android:padding="@dimen/card_padding">
 
         <ImageView
             android:id="@+id/favorite"
@@ -39,7 +39,7 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="@dimen/logo_corner_radius"
                 app:cardElevation="0dp">
 
                 <ImageView
@@ -54,7 +54,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginStart="@dimen/card_padding"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent">
 
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{model.symbol}"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/font_size_l"
                     android:textStyle="bold" />
 
                 <TextView
@@ -72,7 +72,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{model.name}"
-                    android:textColor="@color/grey600" />
+                    android:textColor="@color/grey600"
+                    android:textSize="@dimen/font_size_m" />
 
             </LinearLayout>
 
@@ -81,7 +82,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="@dimen/card_padding"
             app:layout_constraintBottom_toTopOf="@id/market"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/info"
@@ -102,14 +103,14 @@
                 android:layout_marginEnd="8dp"
                 android:text="@{@string/percent_change(model.percentChange24h)}"
                 android:textColor="@{model.percentChange24h >= 0 ? @color/green : @color/red}"
-                android:textSize="13sp" />
+                android:textSize="@dimen/font_size_m" />
 
             <TextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="@dimen/font_size_l"
                 android:textStyle="bold"
                 app:price="@{model.price}" />
 

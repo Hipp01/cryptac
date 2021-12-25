@@ -5,14 +5,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey100"
         tools:context=".view.MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cryptos"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="5dp"
+            android:clipToPadding="false"
+            android:padding="@dimen/item_spacing"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
