@@ -1,36 +1,36 @@
 <resources>
     <!-- Globals -->
     <string name="app_name">Cryptac</string>
-    <string name="favorite">Ajouter aux favoris</string>
     <string name="logo">Logo</string>
     <string name="percent_change">%1$.2f%%</string>
     <string name="integer">%1$d</string>
 
     <!-- Details -->
     <string name="description">Description</string>
-    <string name="market">Marché</string>
+    <string name="market">Market</string>
     <string name="volume_24h">Volume (24h)</string>
-    <string name="market_cap">Capitalisation</string>
-    <string name="rank">Classement</string>
-    <string name="circulating_supply">Qté en circulation</string>
-    <string name="links">Liens</string>
-    <string name="website">Site web</string>
-    <string name="source_code">Code source</string>
-    <string name="arrow">Arrow</string>
+    <string name="market_cap">Market Cap</string>
+    <string name="rank">Ranking</string>
+    <string name="circulating_supply">Circulating Qty</string>
+    <string name="links">Links</string>
+    <string name="website">Website</string>
+    <string name="source_code">Source code</string>
     <string name="whitepaper">Whitepaper</string>
     <string name="twitter">Twitter</string>
     <string name="reddit">Reddit</string>
+    <string name="arrow">Arrow</string>
 
     <!-- Favorites -->
-    <string name="favorite_added">%s ajouté aux favoris</string>
-    <string name="favorite_removed">%s supprimé des favoris</string>
+    <string name="favorite">Add to favorites</string>
+    <string name="favorite_added">%s added to favorites</string>
+    <string name="favorite_removed">%s removed from favorites</string>
 
     <!-- Toolbar -->
-    <string name="switch_list">Affichage en liste</string>
-    <string name="switch_grid">Affichage en grille</string>
+    <string name="switch_list">List view</string>
+    <string name="switch_grid">Grid view</string>
 
-    <!-- Error -->
-    <string name="sad">Emoji triste</string>
-    <string name="error">Désolé, une erreur est survenue.</string>
-    <string name="retry">Réessayer</string>
+    <!-- Errors -->
+    <string name="retry">Try again</string>
+    <string name="error">Sorry, an error occurred.</string>
+    <string name="sad">Sad Emoji</string>
 </resources>
