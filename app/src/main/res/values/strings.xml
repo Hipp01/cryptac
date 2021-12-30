@@ -28,4 +28,9 @@
     <!-- Toolbar -->
     <string name="switch_list">Affichage en liste</string>
     <string name="switch_grid">Affichage en grille</string>
+
+    <!-- Error -->
+    <string name="sad">Emoji triste</string>
+    <string name="error">Désolé, une erreur est survenue.</string>
+    <string name="retry">Réessayer</string>
 </resources>

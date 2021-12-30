@@ -1,14 +1,17 @@
 package fr.tac.cryptac.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils.loadLayoutAnimation
+import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import fr.tac.cryptac.R
@@ -21,6 +24,8 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
+private val TAG = MainActivity::class.simpleName
+
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     /**
@@ -31,6 +36,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val recyclerView: RecyclerView by lazy { findViewById(R.id.cryptos) }
     private val toolbar: Toolbar by lazy { findViewById(R.id.toolbar) }
     private val spinner: ProgressBar by lazy { findViewById(R.id.spinner) }
+    private val error: ConstraintLayout by lazy { findViewById(R.id.error) }
+    private val retry: Button by lazy { error.findViewById(R.id.retry) }
     private val actionGrid by lazy { toolbar.menu.findItem(R.id.action_grid) }
     private val actionList by lazy { toolbar.menu.findItem(R.id.action_list) }
     private val layoutAnimation by lazy { loadLayoutAnimation(this, R.anim.layout_animation) }
@@ -51,26 +58,40 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private lateinit var cryptoList: List<CryptoBasic>
 
     /**
-     * Load the list of the top cryptos
+     * Setup the activity
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
         recyclerView.setHasFixedSize(true)
+        loadCryptoList()
+        retry.setOnClickListener { loadCryptoList() }
+    }
+
+    /**
+     * Load the list of the top cryptos. Display an error if the loading failed.
+     */
+    private fun loadCryptoList() {
+        spinner.visibility = View.VISIBLE
+        recyclerView.visibility = View.GONE
+        error.visibility = View.GONE
 
         disposable = viewModel.cryptoList
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { result ->
+            .subscribe({ result ->
                 cryptoList = result
                 setListLayout()
                 actionGrid.isVisible = true
                 actionList.isVisible = true
                 recyclerView.visibility = View.VISIBLE
                 spinner.visibility = View.GONE
-            }
+            }, {
+                Log.e(TAG, "Could not get crypto list: $it")
+                spinner.visibility = View.GONE
+                error.visibility = View.VISIBLE
+            })
     }
 
     /**
