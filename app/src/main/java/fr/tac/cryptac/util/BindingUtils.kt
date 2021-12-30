@@ -1,9 +1,18 @@
 package fr.tac.cryptac.util
 
+import android.graphics.drawable.Drawable
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
+import fr.tac.cryptac.R
 import fr.tac.cryptac.shared.LOCALE
 import java.text.NumberFormat
 import kotlin.math.floor
@@ -15,16 +24,42 @@ const val MAX_DECIMAL_PLACES = 6
 
 object BindingUtils {
     /**
-     * Load glide in an ImageView element from a new attribute
+     * Load glide in an ImageView element from a new attribute. While the image is loading,
+     * display a spinner.
      * @param view the ImageView element
      * @param imageUrl the URL of the image to load
      */
     @JvmStatic
     @BindingAdapter("imageUrl")
-    fun loadImage(view: ImageView, imageUrl: String) {
+    fun loadImage(view: CardView, imageUrl: String?) {
+        val progressBar = view.findViewById<ProgressBar>(R.id.progress_circular)
+        val imageView = view.findViewById<ImageView>(R.id.logo)
+
         Glide.with(view.context)
             .load(imageUrl)
-            .into(view)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    progressBar.visibility = View.GONE
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    progressBar.visibility = View.GONE
+                    return false
+                }
+            })
+            .into(imageView)
     }
 
     /**

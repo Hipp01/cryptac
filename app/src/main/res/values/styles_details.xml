@@ -53,4 +53,8 @@
         <item name="android:layout_height">25dp</item>
     </style>
 
+    <style name="Toolbar" parent="Theme.Cryptac">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
 </resources>

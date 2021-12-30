@@ -40,14 +40,19 @@
                 android:layout_margin="5dp"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="@dimen/logo_corner_radius"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                app:imageUrl="@{model.logo}">
+
+                <ProgressBar
+                    android:id="@+id/progress_circular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <ImageView
                     android:id="@+id/logo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/logo"
-                    app:imageUrl="@{model.logo}" />
+                    android:contentDescription="@string/logo" />
 
             </androidx.cardview.widget.CardView>
 
@@ -63,9 +68,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_size_m"
                 android:layout_margin="5dp"
-                android:text="@{model.name}" />
+                android:text="@{model.name}"
+                android:textSize="@dimen/font_size_m" />
 
         </LinearLayout>
 
@@ -97,9 +102,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:textSize="@dimen/font_size_m"
                     android:text="@{@string/percent_change(model.percentChange1h)}"
-                    android:textColor="@{model.percentChange1h >= 0 ? @color/green : @color/red}" />
+                    android:textColor="@{model.percentChange1h >= 0 ? @color/green : @color/red}"
+                    android:textSize="@dimen/font_size_m" />
 
             </LinearLayout>
 

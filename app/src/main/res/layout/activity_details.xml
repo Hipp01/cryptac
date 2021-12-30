@@ -10,356 +10,398 @@
             type="fr.tac.cryptac.model.CryptoDetails" />
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/details_spacing">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                style="@style/Card"
-                android:layout_marginTop="0dp">
+        <ScrollView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-                <ImageView
-                    android:id="@+id/logo"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:contentDescription="@string/logo"
-                    app:imageUrl="@{model.logo}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/details_spacing">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/Card"
+                    android:layout_marginTop="0dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/logo_card"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="@dimen/logo_corner_radius"
+                        app:cardElevation="0dp"
+                        app:imageUrl="@{model.logo}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ProgressBar
+                            android:id="@+id/progress_circular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:id="@+id/logo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/logo" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/card_padding"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/logo_card"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{model.symbol}"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_size_2xl"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{model.name}"
+                            android:textSize="@dimen/font_size_l" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="end"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_size_2xl"
+                            android:textStyle="bold"
+                            app:price="@{model.price}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{@string/percent_change(model.percentChange1h)}"
+                            android:textColor="@{model.percentChange1h >= 0 ? @color/green : @color/red}"
+                            android:textSize="@dimen/font_size_l" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/card_padding"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/logo"
-                    app:layout_constraintTop_toTopOf="parent">
+                    style="@style/Card"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/CardTitle"
+                        android:text="@string/description" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{model.symbol}"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/font_size_2xl"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{model.name}"
-                        android:textSize="@dimen/font_size_l" />
+                        android:text="@{model.description}" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:gravity="end"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    style="@style/Card"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/font_size_2xl"
-                        android:textStyle="bold"
-                        app:price="@{model.price}" />
+                        style="@style/CardTitle"
+                        android:text="@string/market" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <GridLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{@string/percent_change(model.percentChange1h)}"
-                        android:textColor="@{model.percentChange1h >= 0 ? @color/green : @color/red}"
-                        android:textSize="@dimen/font_size_l" />
+                        android:alignmentMode="alignBounds"
+                        android:columnCount="2"
+                        android:useDefaultMargins="true">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/volume_24h"
+                                android:textSize="@dimen/font_size_m" />
+
+                            <TextView
+                                style="@style/CardSubtitle"
+                                app:price="@{model.volume24h}" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/market_cap" />
+
+                            <TextView
+                                style="@style/CardSubtitle"
+                                app:price="@{model.marketCap}" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/rank" />
+
+                            <TextView
+                                style="@style/CardSubtitle"
+                                android:text="@{@string/integer(model.cmcRank)}" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/circulating_supply" />
+
+                            <TextView
+                                style="@style/CardSubtitle"
+                                app:number="@{model.circulatingSupply}" />
+
+                        </LinearLayout>
+
+                    </GridLayout>
 
                 </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    style="@style/Card"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                style="@style/Card"
-                android:orientation="vertical">
+                    <TextView
+                        style="@style/CardTitle"
+                        android:text="@string/links" />
 
-                <TextView
-                    style="@style/CardTitle"
-                    android:text="@string/description" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/website"
+                        style="@style/Link"
+                        android:layout_marginTop="0dp"
+                        android:visibility="@{model.website != null ? View.VISIBLE : View.GONE}">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{model.description}" />
+                        <ImageView
+                            android:id="@+id/website_icon"
+                            style="@style/LinkLogo"
+                            android:contentDescription="@string/website"
+                            android:src="@drawable/ic_globe"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            style="@style/LinkName"
+                            android:text="@string/website"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/website_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            style="@style/LinkArrow"
+                            android:contentDescription="@string/arrow"
+                            android:src="@drawable/ic_chevron_right"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/github"
+                        style="@style/Link"
+                        android:visibility="@{model.sourceCode != null ? View.VISIBLE : View.GONE}">
+
+                        <ImageView
+                            android:id="@+id/github_icon"
+                            style="@style/LinkLogo"
+                            android:contentDescription="@string/source_code"
+                            android:src="@drawable/ic_github"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            style="@style/LinkName"
+                            android:text="@string/source_code"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/github_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            style="@style/LinkArrow"
+                            android:contentDescription="@string/arrow"
+                            android:src="@drawable/ic_chevron_right"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/documentation"
+                        style="@style/Link"
+                        android:visibility="@{model.technicalDoc != null ? View.VISIBLE : View.GONE}">
+
+                        <ImageView
+                            android:id="@+id/documentation_icon"
+                            style="@style/LinkLogo"
+                            android:contentDescription="@string/whitepaper"
+                            android:src="@drawable/ic_book"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            style="@style/LinkName"
+                            android:text="@string/whitepaper"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/documentation_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            style="@style/LinkArrow"
+                            android:contentDescription="@string/arrow"
+                            android:src="@drawable/ic_chevron_right"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/twitter"
+                        style="@style/Link"
+                        android:visibility="@{model.twitter != null ? View.VISIBLE : View.GONE}">
+
+                        <ImageView
+                            android:id="@+id/twitter_icon"
+                            style="@style/LinkLogo"
+                            android:contentDescription="@string/twitter"
+                            android:src="@drawable/ic_twitter"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            style="@style/LinkName"
+                            android:text="@string/twitter"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/twitter_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            style="@style/LinkArrow"
+                            android:contentDescription="@string/arrow"
+                            android:src="@drawable/ic_chevron_right"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/reddit"
+                        style="@style/Link"
+                        android:visibility="@{model.reddit != null ? View.VISIBLE : View.GONE}">
+
+                        <ImageView
+                            android:id="@+id/reddit_icon"
+                            style="@style/LinkLogo"
+                            android:contentDescription="@string/reddit"
+                            android:src="@drawable/ic_reddit"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            style="@style/LinkName"
+                            android:text="@string/reddit"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/reddit_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            style="@style/LinkArrow"
+                            android:contentDescription="@string/arrow"
+                            android:src="@drawable/ic_chevron_right"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/Card"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/CardTitle"
-                    android:text="@string/market" />
-
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alignmentMode="alignBounds"
-                    android:columnCount="2"
-                    android:useDefaultMargins="true">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/volume_24h"
-                            android:textSize="@dimen/font_size_m" />
-
-                        <TextView
-                            style="@style/CardSubtitle"
-                            app:price="@{model.volume24h}" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/market_cap" />
-
-                        <TextView
-                            style="@style/CardSubtitle"
-                            app:price="@{model.marketCap}" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/rank" />
-
-                        <TextView
-                            style="@style/CardSubtitle"
-                            android:text="@{@string/integer(model.cmcRank)}" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/circulating_supply" />
-
-                        <TextView
-                            style="@style/CardSubtitle"
-                            app:number="@{model.circulatingSupply}" />
-
-                    </LinearLayout>
-
-                </GridLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                style="@style/Card"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/CardTitle"
-                    android:text="@string/links" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/website"
-                    style="@style/Link"
-                    android:layout_marginTop="0dp"
-                    android:visibility="@{model.website != null ? View.VISIBLE : View.GONE}">
-
-                    <ImageView
-                        android:id="@+id/website_icon"
-                        style="@style/LinkLogo"
-                        android:contentDescription="@string/website"
-                        android:src="@drawable/ic_globe"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        style="@style/LinkName"
-                        android:text="@string/website"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/website_icon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        style="@style/LinkArrow"
-                        android:contentDescription="@string/arrow"
-                        android:src="@drawable/ic_chevron_right"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/github"
-                    style="@style/Link"
-                    android:visibility="@{model.sourceCode != null ? View.VISIBLE : View.GONE}">
-
-                    <ImageView
-                        android:id="@+id/github_icon"
-                        style="@style/LinkLogo"
-                        android:contentDescription="@string/source_code"
-                        android:src="@drawable/ic_github"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        style="@style/LinkName"
-                        android:text="@string/source_code"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/github_icon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        style="@style/LinkArrow"
-                        android:contentDescription="@string/arrow"
-                        android:src="@drawable/ic_chevron_right"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/documentation"
-                    style="@style/Link"
-                    android:visibility="@{model.technicalDoc != null ? View.VISIBLE : View.GONE}">
-
-                    <ImageView
-                        android:id="@+id/documentation_icon"
-                        style="@style/LinkLogo"
-                        android:contentDescription="@string/whitepaper"
-                        android:src="@drawable/ic_book"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        style="@style/LinkName"
-                        android:text="@string/whitepaper"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/documentation_icon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        style="@style/LinkArrow"
-                        android:contentDescription="@string/arrow"
-                        android:src="@drawable/ic_chevron_right"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/twitter"
-                    style="@style/Link"
-                    android:visibility="@{model.twitter != null ? View.VISIBLE : View.GONE}">
-
-                    <ImageView
-                        android:id="@+id/twitter_icon"
-                        style="@style/LinkLogo"
-                        android:contentDescription="@string/twitter"
-                        android:src="@drawable/ic_twitter"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        style="@style/LinkName"
-                        android:text="@string/twitter"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/twitter_icon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        style="@style/LinkArrow"
-                        android:contentDescription="@string/arrow"
-                        android:src="@drawable/ic_chevron_right"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/reddit"
-                    style="@style/Link"
-                    android:visibility="@{model.reddit != null ? View.VISIBLE : View.GONE}">
-
-                    <ImageView
-                        android:id="@+id/reddit_icon"
-                        style="@style/LinkLogo"
-                        android:contentDescription="@string/reddit"
-                        android:src="@drawable/ic_reddit"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        style="@style/LinkName"
-                        android:text="@string/reddit"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/reddit_icon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        style="@style/LinkArrow"
-                        android:contentDescription="@string/arrow"
-                        android:src="@drawable/ic_chevron_right"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
-
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

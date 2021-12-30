@@ -40,14 +40,19 @@
                 android:layout_height="45dp"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="@dimen/logo_corner_radius"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                app:imageUrl="@{model.logo}">
+
+                <ProgressBar
+                    android:id="@+id/progress_circular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <ImageView
                     android:id="@+id/logo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/logo"
-                    app:imageUrl="@{model.logo}" />
+                    android:contentDescription="@string/logo" />
 
             </androidx.cardview.widget.CardView>
 

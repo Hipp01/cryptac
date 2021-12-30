@@ -3,7 +3,10 @@ package fr.tac.cryptac.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import fr.tac.cryptac.R
 import fr.tac.cryptac.databinding.ActivityDetailsBinding
 import fr.tac.cryptac.viewmodel.DetailsViewModel
@@ -21,6 +24,7 @@ class DetailsActivity : AppCompatActivity() {
      */
     private val viewModel by lazy { DetailsViewModel(application) }
     private val binding by lazy { ActivityDetailsBinding.inflate(layoutInflater) }
+    private val toolbar: Toolbar by lazy { findViewById(R.id.toolbar) }
 
     private lateinit var disposable: Disposable
 
@@ -29,7 +33,8 @@ class DetailsActivity : AppCompatActivity() {
      */
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
-        setContentView(R.layout.activity_loading)
+        setContentView(binding.root)
+        enableToolbar()
 
         val symbol = intent.getStringExtra(SYMBOL) ?: error("missing symbol extra")
 
@@ -43,8 +48,35 @@ class DetailsActivity : AppCompatActivity() {
                 binding.documentation.setOnClickListener { openLink(crypto.technicalDoc) }
                 binding.twitter.setOnClickListener { openLink(crypto.twitter) }
                 binding.reddit.setOnClickListener { openLink(crypto.reddit) }
-                setContentView(binding.root)
+                binding.spinner.visibility = View.GONE
+                binding.list.visibility = View.VISIBLE
             }
+    }
+
+    /**
+     * Enable the toolbar
+     */
+    private fun enableToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    /**
+     * When the toolbar back arrow is pressed, go back to the main activity
+     */
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    /**
+     * Inflate the toolbar in the menu
+     * @param menu the menu where to inflate the toolbar
+     */
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     /**

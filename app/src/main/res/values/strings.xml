@@ -24,4 +24,8 @@
     <!-- Favorites -->
     <string name="favorite_added">%s ajouté aux favoris</string>
     <string name="favorite_removed">%s supprimé des favoris</string>
+
+    <!-- Toolbar -->
+    <string name="switch_list">Affichage en liste</string>
+    <string name="switch_grid">Affichage en grille</string>
 </resources>
