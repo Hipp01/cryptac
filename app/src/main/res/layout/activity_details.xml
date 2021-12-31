@@ -16,7 +16,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar"
+            layout="@layout/layout_toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -250,161 +250,40 @@
                         style="@style/CardTitle"
                         android:text="@string/links" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <include
                         android:id="@+id/website"
-                        style="@style/Link"
-                        android:layout_marginTop="0dp"
-                        android:visibility="@{model.website != null ? View.VISIBLE : View.GONE}">
+                        layout="@layout/layout_link"
+                        app:name="@{@string/website}"
+                        app:logo="@{@drawable/ic_globe}"
+                        app:visibility="@{model.website != null ? View.VISIBLE : View.GONE}" />
 
-                        <ImageView
-                            android:id="@+id/website_icon"
-                            style="@style/LinkLogo"
-                            android:contentDescription="@string/website"
-                            android:src="@drawable/ic_globe"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            style="@style/LinkName"
-                            android:text="@string/website"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/website_icon"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            style="@style/LinkArrow"
-                            android:contentDescription="@string/arrow"
-                            android:src="@drawable/ic_chevron_right"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <include
                         android:id="@+id/github"
-                        style="@style/Link"
-                        android:visibility="@{model.sourceCode != null ? View.VISIBLE : View.GONE}">
+                        layout="@layout/layout_link"
+                        app:name="@{@string/source_code}"
+                        app:logo="@{@drawable/ic_github}"
+                        app:visibility="@{model.sourceCode != null ? View.VISIBLE : View.GONE}" />
 
-                        <ImageView
-                            android:id="@+id/github_icon"
-                            style="@style/LinkLogo"
-                            android:contentDescription="@string/source_code"
-                            android:src="@drawable/ic_github"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            style="@style/LinkName"
-                            android:text="@string/source_code"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/github_icon"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            style="@style/LinkArrow"
-                            android:contentDescription="@string/arrow"
-                            android:src="@drawable/ic_chevron_right"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <include
                         android:id="@+id/documentation"
-                        style="@style/Link"
-                        android:visibility="@{model.technicalDoc != null ? View.VISIBLE : View.GONE}">
+                        layout="@layout/layout_link"
+                        app:name="@{@string/whitepaper}"
+                        app:logo="@{@drawable/ic_book}"
+                        app:visibility="@{model.technicalDoc != null ? View.VISIBLE : View.GONE}" />
 
-                        <ImageView
-                            android:id="@+id/documentation_icon"
-                            style="@style/LinkLogo"
-                            android:contentDescription="@string/whitepaper"
-                            android:src="@drawable/ic_book"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            style="@style/LinkName"
-                            android:text="@string/whitepaper"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/documentation_icon"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            style="@style/LinkArrow"
-                            android:contentDescription="@string/arrow"
-                            android:src="@drawable/ic_chevron_right"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <include
                         android:id="@+id/twitter"
-                        style="@style/Link"
-                        android:visibility="@{model.twitter != null ? View.VISIBLE : View.GONE}">
+                        layout="@layout/layout_link"
+                        app:name="@{@string/twitter}"
+                        app:logo="@{@drawable/ic_twitter}"
+                        app:visibility="@{model.twitter != null ? View.VISIBLE : View.GONE}" />
 
-                        <ImageView
-                            android:id="@+id/twitter_icon"
-                            style="@style/LinkLogo"
-                            android:contentDescription="@string/twitter"
-                            android:src="@drawable/ic_twitter"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            style="@style/LinkName"
-                            android:text="@string/twitter"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/twitter_icon"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            style="@style/LinkArrow"
-                            android:contentDescription="@string/arrow"
-                            android:src="@drawable/ic_chevron_right"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <include
                         android:id="@+id/reddit"
-                        style="@style/Link"
-                        android:visibility="@{model.reddit != null ? View.VISIBLE : View.GONE}">
-
-                        <ImageView
-                            android:id="@+id/reddit_icon"
-                            style="@style/LinkLogo"
-                            android:contentDescription="@string/reddit"
-                            android:src="@drawable/ic_reddit"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            style="@style/LinkName"
-                            android:text="@string/reddit"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/reddit_icon"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            style="@style/LinkArrow"
-                            android:contentDescription="@string/arrow"
-                            android:src="@drawable/ic_chevron_right"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        layout="@layout/layout_link"
+                        app:name="@{@string/reddit}"
+                        app:logo="@{@drawable/ic_reddit}"
+                        app:visibility="@{model.reddit != null ? View.VISIBLE : View.GONE}" />
 
                 </LinearLayout>
 

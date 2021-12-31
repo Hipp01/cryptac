@@ -9,7 +9,6 @@ import android.view.animation.AnimationUtils.loadLayoutAnimation
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.ViewDataBinding
@@ -26,6 +25,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 private val TAG = MainActivity::class.simpleName
 
+private const val OPAQUE = 255
+private const val TRANSPARENT = 100
+
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     /**
@@ -41,14 +43,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val actionGrid by lazy { toolbar.menu.findItem(R.id.action_grid) }
     private val actionList by lazy { toolbar.menu.findItem(R.id.action_list) }
     private val layoutAnimation by lazy { loadLayoutAnimation(this, R.anim.layout_animation) }
-
-    /**
-     * Toolbar items icons
-     */
-    private val gridIcon by lazy { getDrawable(this, R.drawable.ic_grid) }
-    private val listIcon by lazy { getDrawable(this, R.drawable.ic_list) }
-    private val gridIconDisabled by lazy { getDrawable(this, R.drawable.ic_grid_disabled) }
-    private val listIconDisabled by lazy { getDrawable(this, R.drawable.ic_list_disabled) }
 
     /**
      * Others
@@ -101,9 +95,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         adapter = CryptoGridAdapter(cryptoList, viewModel, this)
         updateLayout()
         actionGrid.isEnabled = false
+        actionGrid.icon.alpha = OPAQUE
         actionList.isEnabled = true
-        actionGrid.icon = gridIcon
-        actionList.icon = listIconDisabled
+        actionList.icon.alpha = TRANSPARENT
     }
 
     /**
@@ -113,9 +107,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         adapter = CryptoListAdapter(cryptoList, viewModel, this)
         updateLayout()
         actionList.isEnabled = false
+        actionList.icon.alpha = OPAQUE
         actionGrid.isEnabled = true
-        actionGrid.icon = gridIconDisabled
-        actionList.icon = listIcon
+        actionGrid.icon.alpha = TRANSPARENT
     }
 
     /**

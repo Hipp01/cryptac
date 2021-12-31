@@ -60,11 +60,11 @@ class DetailsActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ crypto ->
                 binding.model = crypto
-                binding.website.setOnClickListener { openLink(crypto.website) }
-                binding.github.setOnClickListener { openLink(crypto.sourceCode) }
-                binding.documentation.setOnClickListener { openLink(crypto.technicalDoc) }
-                binding.twitter.setOnClickListener { openLink(crypto.twitter) }
-                binding.reddit.setOnClickListener { openLink(crypto.reddit) }
+                binding.website.root.setOnClickListener { openLink(crypto.website) }
+                binding.github.root.setOnClickListener { openLink(crypto.sourceCode) }
+                binding.documentation.root.setOnClickListener { openLink(crypto.technicalDoc) }
+                binding.twitter.root.setOnClickListener { openLink(crypto.twitter) }
+                binding.reddit.root.setOnClickListener { openLink(crypto.reddit) }
                 binding.spinner.visibility = View.GONE
                 binding.list.visibility = View.VISIBLE
             }, {
