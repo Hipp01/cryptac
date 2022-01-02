@@ -9,10 +9,10 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:contentDescription="@string/sad"
+        android:src="@drawable/ic_sad"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/ic_sad"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -27,13 +27,13 @@
 
     <Button
         android:id="@+id/retry"
-        android:layout_marginTop="25dp"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/text"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"
         android:text="@string/retry"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

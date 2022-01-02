@@ -5,15 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.tac.cryptac.R
 import fr.tac.cryptac.databinding.FragmentListItemBinding
-import fr.tac.cryptac.model.CryptoBasic
 import fr.tac.cryptac.viewmodel.MainViewModel
 
 class CryptoListAdapter(
-    private val cryptoList: List<CryptoBasic>,
     viewModel: MainViewModel,
     private val context: Context
 ) :
-    CryptoBaseAdapter<FragmentListItemBinding>(cryptoList, viewModel, R.layout.fragment_list_item) {
+    CryptoBaseAdapter<FragmentListItemBinding>(viewModel, R.layout.fragment_list_item) {
 
     /**
      * Set the model of the fragment to the corresponding crypto in the local list and set up
@@ -22,8 +20,8 @@ class CryptoListAdapter(
      * @param position the item position in the list
      */
     override fun onBindViewHolder(holder: ViewHolder<FragmentListItemBinding>, position: Int) {
-        holder.binding.model = cryptoList[position]
-        super.onBindViewHolder(holder, position, holder.binding.favorite, cryptoList[position])
+        holder.binding.model = getItem(position)
+        super.onBindViewHolder(holder, position, holder.binding.favorite, getItem(position))
     }
 
     /**

@@ -16,4 +16,12 @@
         android:title="@string/switch_grid"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_favorites"
+        android:visible="false"
+        android:icon="@drawable/ic_favorite_outline"
+        android:title="@string/favorites"
+        android:checkable="true"
+        app:showAsAction="ifRoom" />
+
 </menu>

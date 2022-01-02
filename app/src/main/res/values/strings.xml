@@ -21,6 +21,7 @@
     <string name="arrow">Arrow</string>
 
     <!-- Favorites -->
+    <string name="favorites">Favorites only</string>
     <string name="favorite">Add to favorites</string>
     <string name="favorite_added">%s added to favorites</string>
     <string name="favorite_removed">%s removed from favorites</string>

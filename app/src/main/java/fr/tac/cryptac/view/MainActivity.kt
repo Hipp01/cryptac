@@ -22,6 +22,7 @@ import fr.tac.cryptac.viewmodel.MainViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlin.reflect.KClass
 
 private val TAG = MainActivity::class.simpleName
 
@@ -42,30 +43,24 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val retry: Button by lazy { error.findViewById(R.id.retry) }
     private val actionGrid by lazy { toolbar.menu.findItem(R.id.action_grid) }
     private val actionList by lazy { toolbar.menu.findItem(R.id.action_list) }
+    private val actionFavorites by lazy { toolbar.menu.findItem(R.id.action_favorites) }
     private val layoutAnimation by lazy { loadLayoutAnimation(this, R.anim.layout_animation) }
 
-    /**
-     * Others
-     */
+    // Others
     private lateinit var adapter: CryptoBaseAdapter<out ViewDataBinding>
     private lateinit var disposable: Disposable
     private lateinit var cryptoList: List<CryptoBasic>
 
-    /**
-     * Setup the activity
-     */
+    // Setup the activity (set the according layout, set the toolbar, load the crypto list).
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        recyclerView.setHasFixedSize(true)
         loadCryptoList()
         retry.setOnClickListener { loadCryptoList() }
     }
 
-    /**
-     * Load the list of the top cryptos. Display an error if the loading failed.
-     */
+    // Load the list of the top cryptos. Display an error if the loading failed.
     private fun loadCryptoList() {
         spinner.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
@@ -76,9 +71,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 cryptoList = result
-                setListLayout()
-                actionGrid.isVisible = true
-                actionList.isVisible = true
+                setAdapter(CryptoListAdapter::class)
+                displayToolbarItems()
                 recyclerView.visibility = View.VISIBLE
                 spinner.visibility = View.GONE
             }, {
@@ -89,36 +83,56 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     /**
-     * Select the grid layout
+     * Update the current adapter for the RecyclerView to display the cryptos either as list
+     * or as grid.
+     * @param newAdapter the new adapter to set (has to be an instance of CryptoBaseAdapter)
      */
-    private fun setGridLayout() {
-        adapter = CryptoGridAdapter(cryptoList, viewModel, this)
-        updateLayout()
-        actionGrid.isEnabled = false
-        actionGrid.icon.alpha = OPAQUE
-        actionList.isEnabled = true
-        actionList.icon.alpha = TRANSPARENT
-    }
-
-    /**
-     * Select the list layout
-     */
-    private fun setListLayout() {
-        adapter = CryptoListAdapter(cryptoList, viewModel, this)
-        updateLayout()
-        actionList.isEnabled = false
-        actionList.icon.alpha = OPAQUE
-        actionGrid.isEnabled = true
-        actionGrid.icon.alpha = TRANSPARENT
-    }
-
-    /**
-     * Update the layout after the adapter has been changed
-     */
-    private fun updateLayout() {
-        recyclerView.layoutManager = adapter.getLayoutManager()
+    private fun setAdapter(newAdapter: KClass<out CryptoBaseAdapter<out ViewDataBinding>>) {
+        adapter = newAdapter.constructors.first().call(viewModel, this)
+        adapter.submitList(getCurrentList())
+        recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
+        recyclerView.layoutManager = adapter.getLayoutManager()
         recyclerView.layoutAnimation = layoutAnimation
+
+        when (newAdapter) {
+            CryptoGridAdapter::class -> {
+                enableItem(actionGrid)
+                disableItem(actionList)
+            }
+            CryptoListAdapter::class -> {
+                enableItem(actionList)
+                disableItem(actionGrid)
+            }
+        }
+    }
+
+    /**
+     * Disable a menu item of the toolbar
+     * @param menuItem the menu item to disable
+     */
+    private fun disableItem(menuItem: MenuItem) {
+        menuItem.isEnabled = true
+        menuItem.icon.alpha = TRANSPARENT
+    }
+
+    /**
+     * Enable a menu item of the toolbar
+     * @param menuItem the menu item to enable
+     */
+    private fun enableItem(menuItem: MenuItem) {
+        menuItem.isEnabled = false
+        menuItem.icon.alpha = OPAQUE
+    }
+
+    /**
+     * When the crypto list is loaded, display the toolbar menu items.
+     */
+    private fun displayToolbarItems() {
+        actionFavorites.icon.alpha = TRANSPARENT
+        actionGrid.isVisible = true
+        actionList.isVisible = true
+        actionFavorites.isVisible = true
     }
 
     /**
@@ -136,15 +150,28 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_list -> setListLayout()
-            R.id.action_grid -> setGridLayout()
+            R.id.action_list -> setAdapter(CryptoListAdapter::class)
+            R.id.action_grid -> setAdapter(CryptoGridAdapter::class)
+            R.id.action_favorites -> toggleFavorites()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    /**
-     * Dispose all running observables
-     */
+    // Toggle the favorites menu item to either show the full list of crypto or only the favorites.
+    private fun toggleFavorites() {
+        actionFavorites.isChecked = !actionFavorites.isChecked
+        actionFavorites.icon.alpha = if (actionFavorites.isChecked) OPAQUE else TRANSPARENT
+        adapter.submitList(getCurrentList()) { recyclerView.scrollToPosition(0) }
+    }
+
+    // Get the current crypto list depending of the favorites item state (checked or not)
+    private fun getCurrentList(): List<CryptoBasic> = if (actionFavorites.isChecked) {
+        cryptoList.filter { crypto -> crypto.isFavorite }
+    } else {
+        cryptoList
+    }
+
+    // Dispose all running observables
     override fun onDestroy() {
         super.onDestroy()
         disposable.dispose()

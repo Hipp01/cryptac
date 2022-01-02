@@ -8,9 +8,11 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import fr.tac.cryptac.R
 import fr.tac.cryptac.model.CryptoBasic
+import fr.tac.cryptac.util.CryptoDiffCallback
 import fr.tac.cryptac.view.DetailsActivity
 import fr.tac.cryptac.view.SYMBOL
 import fr.tac.cryptac.viewmodel.MainViewModel
@@ -18,11 +20,10 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 abstract class CryptoBaseAdapter<T : ViewDataBinding>(
-    private var cryptoList: List<CryptoBasic>,
     private val viewModel: MainViewModel,
     private val fragment: Int,
 ) :
-    RecyclerView.Adapter<CryptoBaseAdapter.ViewHolder<T>>() {
+    ListAdapter<CryptoBasic, CryptoBaseAdapter.ViewHolder<T>>(CryptoDiffCallback()) {
 
     /**
      * Get the layout manager that corresponds to the adapter
@@ -70,7 +71,7 @@ abstract class CryptoBaseAdapter<T : ViewDataBinding>(
         position: Int,
         favorite: ImageView
     ) {
-        val crypto = cryptoList[position]
+        val crypto = getItem(position)
         val context = holder.binding.root.context
         favorite.setOnClickListener {
             viewModel.setFavorite(crypto.symbol, !crypto.isFavorite)
@@ -112,8 +113,6 @@ abstract class CryptoBaseAdapter<T : ViewDataBinding>(
     private fun makeToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
-
-    override fun getItemCount() = cryptoList.size
 
     class ViewHolder<T : ViewDataBinding>(val binding: T) : RecyclerView.ViewHolder(binding.root)
 }

@@ -20,6 +20,7 @@
             android:id="@+id/favorite"
             android:layout_width="26dp"
             android:layout_height="26dp"
+            android:alpha="@{model.favorite ? 1f : 0.5f}"
             android:contentDescription="@string/favorite"
             android:src="@{model.favorite ? @drawable/ic_favorite : @drawable/ic_favorite_outline}"
             app:layout_constraintEnd_toEndOf="parent"
