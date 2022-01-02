@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Global -->
+    <string name="app_name">Cryptac</string>
+    <string name="logo">Logo</string>
+    <string name="percent_change">%1$.2f%%</string>
+    <string name="integer">%1$d</string>
+
+    <!-- Details -->
+    <string name="description">Description</string>
+    <string name="market">Marché</string>
+    <string name="volume_24h">Volume (24h)</string>
+    <string name="market_cap">Capitalisation</string>
+    <string name="rank">Rang</string>
+    <string name="circulating_supply">Qté en circulation</string>
+    <string name="links">Liens</string>
+    <string name="website">Site web</string>
+    <string name="source_code">Code source</string>
+    <string name="whitepaper">Whitepaper</string>
+    <string name="twitter">Twitter</string>
+    <string name="reddit">Reddit</string>
+    <string name="arrow">Arrow</string>
+
+    <!-- Favoris -->
+    <string name="favorites">Favoris uniquement</string>
+    <string name="favorite">Ajouter aux favoris</string>
+    <string name="favorite_added">%s ajouté aux favoris</string>
+    <string name="favorite_removed">%s supprimé des favoris</string>
+
+    <!-- Toolbar -->
+    <string name="switch_list">Vue en liste</string>
+    <string name="switch_grid">Vue en grille</string>
+
+    <!-- Errors -->
+    <string name="retry">Réessayez</string>
+    <string name="error">Désolé, une erreur est survenue</string>
+    <string name="sad">Emoji triste</string>
+
+
+</resources>
