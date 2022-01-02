@@ -26,6 +26,7 @@
     <string name="favorite">Ajouter aux favoris</string>
     <string name="favorite_added">%s ajouté aux favoris</string>
     <string name="favorite_removed">%s supprimé des favoris</string>
+    <string name="no_favorites">Aucun favoris.</string>
 
     <!-- Toolbar -->
     <string name="switch_list">Vue en liste</string>

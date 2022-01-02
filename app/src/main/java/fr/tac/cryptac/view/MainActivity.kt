@@ -8,6 +8,7 @@ import android.view.View
 import android.view.animation.AnimationUtils.loadLayoutAnimation
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.appcompat.widget.Toolbar
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val toolbar: Toolbar by lazy { findViewById(R.id.toolbar) }
     private val spinner: ProgressBar by lazy { findViewById(R.id.spinner) }
     private val error: ConstraintLayout by lazy { findViewById(R.id.error) }
+    private val empty: TextView by lazy { findViewById(R.id.empty_list) }
     private val retry: Button by lazy { error.findViewById(R.id.retry) }
     private val layoutAnimation by lazy { loadLayoutAnimation(this, R.anim.layout_animation) }
     private val swipeContainer: SwipeRefreshLayout by lazy { findViewById(R.id.swipe_container) }
@@ -70,6 +72,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         readBundle(savedInstanceState)
         swipeContainer.setOnRefreshListener { loadCryptoList() }
         retry.setOnClickListener { loadCryptoList() }
+        favoritesListener = viewModel.favoritesListener.subscribe { updatedCrypto ->
+            // Crypto has been removed from favorites
+            if (onlyFavorites && !updatedCrypto.isFavorite) refreshList()
+        }
     }
 
     // Read potentially saved values from the bundle.
@@ -105,6 +111,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         spinner.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
         error.visibility = View.GONE
+        empty.visibility = View.GONE
 
         fetchCryptoList = viewModel.cryptoList
             .subscribeOn(Schedulers.io())
@@ -119,21 +126,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             })
     }
 
+    // When the crypto list if loaded, setup the different elements accordingly
     private fun cryptoListLoaded() {
         setLayout(layout)
         displayToolbarItems()
         recyclerView.visibility = View.VISIBLE
         spinner.visibility = View.GONE
         swipeContainer.isRefreshing = false
-
-        // Listen for favorites list changes
-        if (favoritesListener == null) {
-            favoritesListener = viewModel.favoritesListener.subscribe { updatedCrypto ->
-                if (onlyFavorites && !updatedCrypto.isFavorite) {
-                    adapter.submitList(getCurrentList())
-                }
-            }
-        }
     }
 
     /**
@@ -145,11 +144,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun setLayout(newLayout: Layout) {
         layout = newLayout
         adapter = layout.adapter.constructors.first().call(viewModel, this)
-        adapter.submitList(getCurrentList())
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = adapter.getLayoutManager()
         recyclerView.layoutAnimation = layoutAnimation
+        refreshList()
 
         when (layout) {
             Layout.GRID -> {
@@ -221,7 +220,27 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         onlyFavorites = !onlyFavorites
         actionFavorites.isChecked = onlyFavorites
         actionFavorites.icon = getFavoritesIcon()
-        adapter.submitList(getCurrentList()) { recyclerView.scrollToPosition(0) }
+        refreshList(true)
+    }
+
+    /**
+     * Refresh the adapter list.
+     * @param scrollToTop true if you want the recycler view to scroll to top after the refresh
+     */
+    private fun refreshList(scrollToTop: Boolean = false) {
+        val list = getCurrentList()
+
+        if (list.isEmpty()) {
+            recyclerView.visibility = View.GONE
+            empty.visibility = View.VISIBLE
+        } else {
+            recyclerView.visibility = View.VISIBLE
+            empty.visibility = View.GONE
+        }
+
+        return adapter.submitList(list) {
+            if (scrollToTop) recyclerView.scrollToPosition(0)
+        }
     }
 
     // Get the current crypto list (all the list or just the favorites)
