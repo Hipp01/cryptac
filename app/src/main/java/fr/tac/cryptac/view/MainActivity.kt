@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils.loadLayoutAnimation
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.ViewDataBinding
@@ -178,7 +179,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     // When the crypto list is loaded, display the toolbar menu items.
     private fun displayToolbarItems() {
-        actionFavorites.icon.alpha = if (onlyFavorites) Alpha.OPAQUE else Alpha.TRANSPARENT
+        actionFavorites.icon = getFavoritesIcon()
         actionGrid.isVisible = true
         actionList.isVisible = true
         actionFavorites.isVisible = true
@@ -215,7 +216,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun toggleFavorites() {
         onlyFavorites = !onlyFavorites
         actionFavorites.isChecked = onlyFavorites
-        actionFavorites.icon.alpha = if (onlyFavorites) Alpha.OPAQUE else Alpha.TRANSPARENT
+        actionFavorites.icon = getFavoritesIcon()
         adapter.submitList(getCurrentList()) { recyclerView.scrollToPosition(0) }
     }
 
@@ -224,6 +225,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         cryptoList.filter { crypto -> crypto.isFavorite }
     } else {
         cryptoList
+    }
+
+    // Get the current icon for the favorite menu item
+    private fun getFavoritesIcon() = if (onlyFavorites) {
+        getDrawable(this, R.drawable.ic_favorite)
+    } else {
+        getDrawable(this, R.drawable.ic_favorite_outline)
     }
 
     /**

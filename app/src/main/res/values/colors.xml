@@ -3,10 +3,9 @@
     <color name="blue">#346DFF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="grey100">#F9F9F9</color>
-    <color name="grey200">#EDEDED</color>
-    <color name="grey400">#BFBFBF</color>
-    <color name="grey600">#888888</color>
+    <color name="transparent">#CCFFFFFF</color>
+    <color name="light_grey">#20000000</color>
+    <color name="grey">#80000000</color>
     <color name="green">#0DB677</color>
     <color name="red">#E94772</color>
 </resources>

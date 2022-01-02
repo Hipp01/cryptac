@@ -25,6 +25,7 @@
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/Spinner"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +34,11 @@
         <include
             android:id="@+id/error"
             layout="@layout/layout_error"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:id="@+id/list"
@@ -253,36 +254,36 @@
                     <include
                         android:id="@+id/website"
                         layout="@layout/layout_link"
-                        app:name="@{@string/website}"
                         app:logo="@{@drawable/ic_globe}"
+                        app:name="@{@string/website}"
                         app:visibility="@{model.website != null ? View.VISIBLE : View.GONE}" />
 
                     <include
                         android:id="@+id/github"
                         layout="@layout/layout_link"
-                        app:name="@{@string/source_code}"
                         app:logo="@{@drawable/ic_github}"
+                        app:name="@{@string/source_code}"
                         app:visibility="@{model.sourceCode != null ? View.VISIBLE : View.GONE}" />
 
                     <include
                         android:id="@+id/documentation"
                         layout="@layout/layout_link"
-                        app:name="@{@string/whitepaper}"
                         app:logo="@{@drawable/ic_book}"
+                        app:name="@{@string/whitepaper}"
                         app:visibility="@{model.technicalDoc != null ? View.VISIBLE : View.GONE}" />
 
                     <include
                         android:id="@+id/twitter"
                         layout="@layout/layout_link"
-                        app:name="@{@string/twitter}"
                         app:logo="@{@drawable/ic_twitter}"
+                        app:name="@{@string/twitter}"
                         app:visibility="@{model.twitter != null ? View.VISIBLE : View.GONE}" />
 
                     <include
                         android:id="@+id/reddit"
                         layout="@layout/layout_link"
-                        app:name="@{@string/reddit}"
                         app:logo="@{@drawable/ic_reddit}"
+                        app:name="@{@string/reddit}"
                         app:visibility="@{model.reddit != null ? View.VISIBLE : View.GONE}" />
 
                 </LinearLayout>
