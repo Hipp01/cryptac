@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.gson.Gson
 import fr.tac.cryptac.R
 import fr.tac.cryptac.databinding.ActivityDetailsBinding
@@ -33,6 +34,8 @@ class DetailsActivity : AppCompatActivity() {
     private val binding by lazy { ActivityDetailsBinding.inflate(layoutInflater) }
     private val toolbar: Toolbar by lazy { findViewById(R.id.toolbar) }
     private val retry: Button by lazy { binding.error.findViewById(R.id.retry) }
+    private val swipeContainer: SwipeRefreshLayout by lazy { findViewById(R.id.swipe_container2) }
+
 
     private var disposable: Disposable? = null
 
@@ -45,7 +48,7 @@ class DetailsActivity : AppCompatActivity() {
         enableToolbar()
         val symbol = intent.getStringExtra(SYMBOL) ?: error("missing symbol extra")
         val savedCrypto = bundle?.getString(DETAILS)
-
+        swipeContainer.setOnRefreshListener { loadDetails(symbol) }
         if (savedCrypto != null) {
             Log.i(TAG, "Using details from bundle")
             val crypto = Gson().fromJson(savedCrypto, CryptoDetails::class.java)
@@ -95,6 +98,7 @@ class DetailsActivity : AppCompatActivity() {
         binding.reddit.root.setOnClickListener { openLink(crypto.reddit) }
         binding.spinner.visibility = View.GONE
         binding.list.visibility = View.VISIBLE
+        swipeContainer.isRefreshing = false
     }
 
     /**
