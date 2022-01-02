@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val viewModel: MainViewModel by lazy { MainViewModel(application) }
     private val recyclerView: RecyclerView by lazy { findViewById(R.id.cryptos) }
     private val toolbar: Toolbar by lazy { findViewById(R.id.toolbar) }
-    private val spinner: ProgressBar by lazy { findViewById(R.id.spinner) }
     private val error: ConstraintLayout by lazy { findViewById(R.id.error) }
     private val empty: TextView by lazy { findViewById(R.id.empty_list) }
     private val retry: Button by lazy { error.findViewById(R.id.retry) }
@@ -108,10 +107,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     // Load the list of the top cryptos. Display an error if the loading failed.
     private fun loadCryptoList() {
-        spinner.visibility = View.VISIBLE
-        recyclerView.visibility = View.GONE
         error.visibility = View.GONE
         empty.visibility = View.GONE
+        swipeContainer.isRefreshing = true
 
         fetchCryptoList = viewModel.cryptoList
             .subscribeOn(Schedulers.io())
@@ -121,8 +119,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 cryptoListLoaded()
             }, {
                 Log.e(TAG, "Could not get crypto list: $it")
-                spinner.visibility = View.GONE
+                recyclerView.visibility = View.GONE
                 error.visibility = View.VISIBLE
+                swipeContainer.isRefreshing = false
             })
     }
 
@@ -130,8 +129,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun cryptoListLoaded() {
         setLayout(layout)
         displayToolbarItems()
-        recyclerView.visibility = View.VISIBLE
-        spinner.visibility = View.GONE
         swipeContainer.isRefreshing = false
     }
 

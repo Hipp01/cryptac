@@ -34,7 +34,7 @@ class DetailsActivity : AppCompatActivity() {
     private val binding by lazy { ActivityDetailsBinding.inflate(layoutInflater) }
     private val toolbar: Toolbar by lazy { findViewById(R.id.toolbar) }
     private val retry: Button by lazy { binding.error.findViewById(R.id.retry) }
-    private val swipeContainer: SwipeRefreshLayout by lazy { findViewById(R.id.swipe_container2) }
+    private val swipeContainer: SwipeRefreshLayout by lazy { findViewById(R.id.swipe_container) }
 
 
     private var disposable: Disposable? = null
@@ -67,9 +67,8 @@ class DetailsActivity : AppCompatActivity() {
      * @param symbol the crypto symbol
      */
     private fun loadDetails(symbol: String) {
-        binding.spinner.visibility = View.VISIBLE
         binding.error.visibility = View.GONE
-        binding.list.visibility = View.GONE
+        swipeContainer.isRefreshing = true
 
         disposable = viewModel.getCryptoDetails(symbol)
             .subscribeOn(Schedulers.io())
@@ -79,7 +78,8 @@ class DetailsActivity : AppCompatActivity() {
             }, {
                 Log.e(TAG, "Could not get crypto details: $it")
                 binding.error.visibility = View.VISIBLE
-                binding.spinner.visibility = View.GONE
+                binding.list.visibility = View.GONE
+                swipeContainer.isRefreshing = false
             })
     }
 
@@ -96,7 +96,6 @@ class DetailsActivity : AppCompatActivity() {
         binding.documentation.root.setOnClickListener { openLink(crypto.technicalDoc) }
         binding.twitter.root.setOnClickListener { openLink(crypto.twitter) }
         binding.reddit.root.setOnClickListener { openLink(crypto.reddit) }
-        binding.spinner.visibility = View.GONE
         binding.list.visibility = View.VISIBLE
         swipeContainer.isRefreshing = false
     }
