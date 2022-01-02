@@ -36,7 +36,6 @@ class DetailsActivity : AppCompatActivity() {
     private val retry: Button by lazy { binding.error.findViewById(R.id.retry) }
     private val swipeContainer: SwipeRefreshLayout by lazy { findViewById(R.id.swipe_container) }
 
-
     private var disposable: Disposable? = null
 
     /**
@@ -67,7 +66,6 @@ class DetailsActivity : AppCompatActivity() {
      * @param symbol the crypto symbol
      */
     private fun loadDetails(symbol: String) {
-        binding.error.visibility = View.GONE
         swipeContainer.isRefreshing = true
 
         disposable = viewModel.getCryptoDetails(symbol)
@@ -97,6 +95,7 @@ class DetailsActivity : AppCompatActivity() {
         binding.twitter.root.setOnClickListener { openLink(crypto.twitter) }
         binding.reddit.root.setOnClickListener { openLink(crypto.reddit) }
         binding.list.visibility = View.VISIBLE
+        binding.error.visibility = View.GONE
         swipeContainer.isRefreshing = false
     }
 

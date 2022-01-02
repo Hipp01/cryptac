@@ -1,18 +1,11 @@
 package fr.tac.cryptac.util
 
-import android.graphics.drawable.Drawable
-import android.view.View
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import fr.tac.cryptac.R
 import fr.tac.cryptac.shared.LOCALE
 import java.text.NumberFormat

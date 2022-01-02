@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils.loadLayoutAnimation
 import android.widget.Button
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
@@ -107,7 +106,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     // Load the list of the top cryptos. Display an error if the loading failed.
     private fun loadCryptoList() {
-        error.visibility = View.GONE
         empty.visibility = View.GONE
         swipeContainer.isRefreshing = true
 
@@ -129,6 +127,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun cryptoListLoaded() {
         setLayout(layout)
         displayToolbarItems()
+        error.visibility = View.GONE
         swipeContainer.isRefreshing = false
     }
 
