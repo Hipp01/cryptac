@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import fr.tac.cryptac.R
 import fr.tac.cryptac.adapter.CryptoBaseAdapter
 import fr.tac.cryptac.enums.Alpha
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val error: ConstraintLayout by lazy { findViewById(R.id.error) }
     private val retry: Button by lazy { error.findViewById(R.id.retry) }
     private val layoutAnimation by lazy { loadLayoutAnimation(this, R.anim.layout_animation) }
+    private val swipeContainer: SwipeRefreshLayout by lazy { findViewById(R.id.swipe_container) }
 
     // Toolbar menu items
     private lateinit var actionGrid: MenuItem
@@ -66,6 +68,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
         readBundle(savedInstanceState)
+        swipeContainer.setOnRefreshListener { loadCryptoList() }
         retry.setOnClickListener { loadCryptoList() }
     }
 
@@ -121,6 +124,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         displayToolbarItems()
         recyclerView.visibility = View.VISIBLE
         spinner.visibility = View.GONE
+        swipeContainer.isRefreshing = false
 
         // Listen for favorites list changes
         if (favoritesListener == null) {
