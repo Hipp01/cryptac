@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -117,6 +116,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/grey"
                                 android:text="@{model.name}"
                                 android:textSize="@dimen/font_size_l" />
 
@@ -162,6 +162,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/grey"
                             android:text="@{model.description}" />
 
                     </LinearLayout>
@@ -190,6 +191,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/grey"
                                     android:text="@string/volume_24h"
                                     android:textSize="@dimen/font_size_m" />
 
@@ -208,6 +210,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/grey"
                                     android:text="@string/market_cap" />
 
                                 <TextView
@@ -225,6 +228,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/grey"
                                     android:text="@string/rank" />
 
                                 <TextView
@@ -242,6 +246,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/grey"
                                     android:text="@string/circulating_supply" />
 
                                 <TextView

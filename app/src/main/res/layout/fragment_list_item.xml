@@ -31,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:textColor="@color/grey"
                 android:paddingHorizontal="@dimen/list_item_padding"
                 android:text="@{@string/integer(model.cmcRank)}" />
 
@@ -68,6 +69,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/grey"
                 android:layout_margin="5dp"
                 android:text="@{model.name}"
                 android:textSize="@dimen/font_size_m" />
