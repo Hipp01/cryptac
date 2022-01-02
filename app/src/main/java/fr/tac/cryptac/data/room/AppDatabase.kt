@@ -10,7 +10,7 @@ import fr.tac.cryptac.data.room.dao.DetailsDao
 import fr.tac.cryptac.data.room.dao.FavoriteDao
 import fr.tac.cryptac.shared.DATABASE_NAME
 
-@Database(entities = [Details::class, Favorite::class], version = 1)
+@Database(entities = [Details::class, Favorite::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun detailsDao(): DetailsDao

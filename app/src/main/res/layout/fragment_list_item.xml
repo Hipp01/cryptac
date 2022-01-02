@@ -111,6 +111,7 @@
             <ImageView
                 android:id="@+id/favorite"
                 android:layout_width="25dp"
+                app:tint="@{model.favorite ? @color/red : @color/black}"
                 android:alpha="@{model.favorite ? 1f : 0.5f}"
                 android:layout_height="25dp"
                 android:layout_margin="10dp"

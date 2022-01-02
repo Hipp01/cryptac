@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -24,7 +25,7 @@ const val MAX_DECIMAL_PLACES = 6
 
 object BindingUtils {
     /**
-     * Load glide in an ImageView element from a new attribute. While the image is loading,
+     * Load Glide in an ImageView element from a new attribute. While the image is loading,
      * display a spinner.
      * @param view the ImageView element
      * @param imageUrl the URL of the image to load
@@ -60,6 +61,17 @@ object BindingUtils {
                 }
             })
             .into(imageView)
+    }
+
+    /**
+     * Set the color tint of an ImageView (typically, an icon).
+     * @param view the ImageView element
+     * @param color the color tint to set
+     */
+    @JvmStatic
+    @BindingAdapter("tint")
+    fun setTint(view: ImageView, @ColorInt color: Int) {
+        view.setColorFilter(color)
     }
 
     /**

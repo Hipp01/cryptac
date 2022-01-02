@@ -86,6 +86,7 @@ abstract class CryptoBaseAdapter<T : ViewDataBinding>(
                     }
                     makeToast(context, context.getString(resId, crypto.symbol))
                     notifyItemChanged(position, Unit)
+                    viewModel.favoritesListener.onNext(crypto)
                 }
         }
     }
