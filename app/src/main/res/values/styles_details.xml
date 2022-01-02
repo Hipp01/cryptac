@@ -5,7 +5,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/details_spacing</item>
-        <item name="android:background">@drawable/outline_background</item>
+        <item name="android:background">@drawable/bg_outline</item>
         <item name="android:padding">@dimen/card_padding</item>
     </style>
 
@@ -29,7 +29,7 @@
     <style name="Link">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/ripple_background</item>
+        <item name="android:background">@drawable/bg_ripple</item>
         <item name="android:clickable">true</item>
         <item name="android:padding">10dp</item>
         <item name="android:layout_marginTop">@dimen/card_padding</item>
