@@ -1,11 +1,14 @@
-<p align="center">
-  <img src=".assets/banner.png" />
-</p>
+![Banner](.assets/banner.png)
 
 # What is it? 🤔
 
 **Cryptac** is a mobile application that allows you to track the main important information about
 your favorite cryptos. It is currently available only on Android (> 10).
+
+
+## Screenshots
+
+![Screenshots](.assets/screenshots.png)
 
 
 # Tech Stack 🛠
