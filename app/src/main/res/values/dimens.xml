@@ -6,7 +6,7 @@
     <dimen name="card_padding">15dp</dimen>
     <dimen name="list_item_padding">5dp</dimen>
     <dimen name="logo_corner_radius">10dp</dimen>
-    <dimen name="item_corner_radius">5dp</dimen>
+    <dimen name="item_corner_radius">7dp</dimen>
 
     <!-- Font sizes -->
     <dimen name="font_size_m">13sp</dimen>

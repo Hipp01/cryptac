@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blue">#346DFF</color>
-    <color name="black">#FF000000</color>
+    <color name="blue">#08235A</color>
+    <color name="black">#FFFFFF</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="transparent">#CCFFFFFF</color>
-    <color name="light_grey">#20000000</color>
-    <color name="grey">#80000000</color>
-    <color name="green">#0DB677</color>
-    <color name="red">#E94772</color>
+    <color name="transparent">#15FFFFFF</color>
+    <color name="light_grey">#60FFFFFF</color>
+    <color name="grey">#BBFFFFFF</color>
+    <color name="green">#CC4DFFBE</color>
+    <color name="red">#EEFF6873</color>
 </resources>

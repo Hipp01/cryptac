@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             })
     }
 
-    // When the crypto list if loaded, setup the different elements accordingly
+    // When the crypto list is loaded, setup the different elements accordingly
     private fun cryptoListLoaded() {
         setLayout(layout)
         displayToolbarItems()
