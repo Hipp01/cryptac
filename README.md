@@ -13,7 +13,7 @@ your favorite cryptos. It is currently available only on Android (> 10).
 
 # Tech Stack 🛠
 
-- Language [Kotlin](https://kotlinlang.org/)
+- Language: [Kotlin](https://kotlinlang.org/) (❤️)
 - Architecture: [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)
 - Database: [Room](https://developer.android.com/jetpack/androidx/releases/room)
 - HTTP client: [Retrofit](https://square.github.io/retrofit/)
