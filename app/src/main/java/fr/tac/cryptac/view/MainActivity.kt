@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         empty.visibility = View.GONE
         swipeContainer.isRefreshing = true
 
-        fetchCryptoList = viewModel.cryptoList
+        fetchCryptoList = viewModel.getCryptoList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
